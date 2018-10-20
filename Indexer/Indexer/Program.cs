@@ -1,21 +1,44 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Indexer
 {
+
   class Program
   {
+  
+    static MyIndexerStruct<string> indexerStruct = new MyIndexerStruct<string>();
     static void Main(string[] args)
     {
-      // The code provided will print ‘Hello World’ to the console.
-      // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-      Console.WriteLine("Hello World!");
-      Console.ReadKey();
-
-      // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
+      var indexerClass=new MyIndexerClass<string>();
+      var times=100000;
+      var watch=new Stopwatch();
+      watch.Start();
+      for (int i = 0; i < times; i++)
+      {
+        for (int j = 0; j < 100; j++)
+        {
+          indexerClass[j] = "" + i + " " + j;
+        }
+      }
+      watch.Stop();
+      Console.WriteLine("Indexer class executed {0}. Time took: {1} milliseconds.",times, watch.ElapsedMilliseconds);
+      watch.Reset();
+      watch.Start();
+      for (int i = 0; i < times; i++)
+      {
+        for (int j = 0; j < 100; j++)
+        {
+          indexerStruct[j] = "" + i + " " + j;
+        }
+      }
+      watch.Stop();
+      Console.WriteLine("Indexer struct executed {0}. Time took: {1} milliseconds.", times, watch.ElapsedMilliseconds);
     }
   }
 }
