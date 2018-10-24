@@ -1,11 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAPI.Fluent;
 
 namespace FluentAPI
@@ -19,12 +11,13 @@ namespace FluentAPI
           .Is(Status.Signed)
           .Not(Status.Paid)
           .Is(Status.Valid)
+          .Is(Status.Visible)
         .List();
-      new Documents()
-        .ForAssociation(1)
-          .Is(Status.Paid)
-          .Not(Status.Valid)
-        .List();
+      //new Documents()
+      //  .ForAssociation(1)
+      //    .Is(Status.Paid)
+      //    .Not(Status.Valid)
+      //  .List();
     }
   }
 }

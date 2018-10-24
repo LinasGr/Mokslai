@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using FluentAPI.Fluent.ForProfile;
 using FluentAPI.Fluent.ForAssociation;
+
 
 namespace FluentAPI.Fluent
 {
@@ -15,7 +12,7 @@ namespace FluentAPI.Fluent
       return new ForProfile.ForProfile();
     }
 
-    public ForAssociation.ForAssociation ForAssociation(int id)
+    public IForAssociation ForAssociation(int id)
     {
       return new ForAssociation.ForAssociation();
     }
@@ -25,6 +22,7 @@ namespace FluentAPI.Fluent
   {
     Signed,
     Paid,
-    Valid
+    Valid,
+    Visible
   }
 }
