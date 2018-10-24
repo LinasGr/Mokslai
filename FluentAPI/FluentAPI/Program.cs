@@ -20,6 +20,11 @@ namespace FluentAPI
           .Not(Status.Paid)
           .Is(Status.Valid)
         .List();
+      new Documents()
+        .ForAssociation(1)
+          .Is(Status.Paid)
+          .Not(Status.Valid)
+        .List();
     }
   }
 }

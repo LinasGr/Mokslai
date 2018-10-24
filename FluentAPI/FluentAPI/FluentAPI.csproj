@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fluent\Documents.cs" />
+    <Compile Include="Fluent\ForAssociation\ForAssocciation.cs" />
+    <Compile Include="Fluent\ForAssociation\IForAssociation.cs" />
     <Compile Include="Fluent\ForProfile\ForProfile.cs" />
     <Compile Include="Fluent\ForProfile\IForProfile.cs" />
     <Compile Include="Program.cs" />
