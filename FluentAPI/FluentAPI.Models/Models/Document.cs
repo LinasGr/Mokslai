@@ -2,7 +2,7 @@
 
 namespace FluentAPI.Models
 {
-  public class Document
+  public class Document:IModels
   {
     public int Id { get; set; }
     public int AssociationsId { get; set; }

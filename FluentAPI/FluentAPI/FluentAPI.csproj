@@ -54,7 +54,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\FluentAPI.Models.csproj">
+    <ProjectReference Include="..\FluentAPI.Models\FluentAPI.Models.csproj">
       <Project>{92d33eba-06c5-4047-9473-9948109fd714}</Project>
       <Name>FluentAPI.Models</Name>
     </ProjectReference>

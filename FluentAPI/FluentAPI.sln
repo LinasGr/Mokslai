@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAPI", "FluentAPI\FluentAPI.csproj", "{06312058-8337-4CBA-89E5-6EFA8F3D96FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAPI.Models", "Models\FluentAPI.Models.csproj", "{92D33EBA-06C5-4047-9473-9948109FD714}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAPI.Models", "FluentAPI.Models\FluentAPI.Models.csproj", "{92D33EBA-06C5-4047-9473-9948109FD714}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

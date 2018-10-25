@@ -8,6 +8,7 @@ namespace FluentAPI.Fluent.ForProfile
   class ForProfile : IForProfile
   {
     private Dictionary<Status,bool> Filter=new Dictionary<Status, bool>();
+
     public IForProfile Is(Status status)
     {
       if (Filter.ContainsKey(status))
@@ -22,6 +23,7 @@ namespace FluentAPI.Fluent.ForProfile
       List<Document> documents=new List<Document>();
       //do query with these filters
       Filter.ToList().ForEach(x=>Console.WriteLine(x.Key+" - "+ x.Value));
+      Db db=new Db("test.db");
     }
 
     public IForProfile Not(Status status)

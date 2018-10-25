@@ -13,6 +13,7 @@ namespace FluentAPI
           .Is(Status.Valid)
           .Is(Status.Visible)
         .List();
+
       //new Documents()
       //  .ForAssociation(1)
       //    .Is(Status.Paid)
