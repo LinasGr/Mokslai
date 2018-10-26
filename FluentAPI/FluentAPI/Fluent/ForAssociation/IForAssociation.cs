@@ -3,7 +3,7 @@
   interface IForAssociation
   {
     void List();
-    IForAssociation Is(Status status);
-    IForAssociation Not(Status status);
+    IForAssociation Is(DocumentStatus status);
+    IForAssociation Not(DocumentStatus status);
   }
 }

@@ -9,14 +9,19 @@ namespace FluentAPI.Fluent.ForAssociation
       throw new NotImplementedException();
     }
 
-    public IForAssociation Is(Status status)
+    public IForAssociation Is(DocumentStatus status)
     {
       throw new NotImplementedException();
     }
 
-    public IForAssociation Not(Status status)
+    public IForAssociation Not(DocumentStatus status)
     {
       throw new NotImplementedException();
+    }
+
+    public ForAssociation(int id = 0)
+    {
+
     }
   }
 }

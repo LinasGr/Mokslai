@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using FluentAPI.Fluent;
-using FluentAPI.Models;
 
 namespace FluentAPI
 {
@@ -9,12 +6,12 @@ namespace FluentAPI
   {
     static void Main(string[] args)
     {
+      //Testing Fluent Api SQLite querry to JSON
       new Documents()
         .ForProfile(1)
-          .Is(Status.Signed)
-          .Not(Status.Paid)
-          .Is(Status.Valid)
-          .Is(Status.Visible)
+          .Is(DocumentStatus.Visible)
+          .OrderDecreaseColumn(DocumentColumns.Id)
+          .OrderDecreaseColumn(DocumentColumns.Paid)
         .List();
 
       //new Documents()
@@ -28,9 +25,11 @@ namespace FluentAPI
       //doc.Text = "Text of document...";
       //doc.ExpirationDate = DateTime.Now + TimeSpan.FromDays(10);
       //doc.ValidationDate = DateTime.Now;
-      //List<Document> lDoc=new List<Document>();
+      //List<Document> lDoc = new List<Document>();
       //lDoc = Db.LoadDocuments();
+
       //Db.AddDocument(doc);
+
     }
   }
 }
