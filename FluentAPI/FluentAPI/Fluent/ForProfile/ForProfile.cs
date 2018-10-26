@@ -23,7 +23,6 @@ namespace FluentAPI.Fluent.ForProfile
       List<Document> documents=new List<Document>();
       //do query with these filters
       Filter.ToList().ForEach(x=>Console.WriteLine(x.Key+" - "+ x.Value));
-      Db db=new Db("test.db");
     }
 
     public IForProfile Not(Status status)
