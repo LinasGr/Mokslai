@@ -10,14 +10,13 @@ namespace FluentAPI
       new Documents()
         .ForProfile(1)
           .Is(DocumentStatus.Visible)
-          .OrderDecreaseColumn(DocumentColumns.Id)
-          .OrderDecreaseColumn(DocumentColumns.Paid)
+          .Not(DocumentStatus.Valid)
+          .OrderDESCColumn(DocumentColumns.AssociationId)
         .List();
-
       //new Documents()
       //  .ForAssociation(1)
-      //    .Is(Status.Paid)
-      //    .Not(Status.Valid)
+      //    .Is(DocumentStatus.Paid)
+      //    .Not(DocumentStatus.Valid)
       //  .List();
 
       //Document doc = new Document();

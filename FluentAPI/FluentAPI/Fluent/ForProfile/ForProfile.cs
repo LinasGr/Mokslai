@@ -55,7 +55,7 @@ namespace FluentAPI.Fluent.ForProfile
         Filter[status] = false;
       else
         Filter.Add(status, false);
-      return this as IForProfile;
+      return this as ForProfile;
     }
 
     /// <summary>
@@ -104,9 +104,9 @@ namespace FluentAPI.Fluent.ForProfile
             case DocumentStatus.Valid:
               if (sqlString.Length > 7) sqlString += "AND ";
               if (arr.Value)
-                sqlString += "ValidationDate<=" + DateTime.Now + " ExpirationDate>=" + DateTime.Now + " ";
+                sqlString += "date('now') BETWEEN ValidationDate AND ExpirationDate ";
               else
-                sqlString += "ValidationDate>" + DateTime.Now + " ExpirationDate<" + DateTime.Now + " ";
+                sqlString += "date('now') NOT BETWEEN ValidationDate AND ExpirationDate ";
               break;
           }
         }
@@ -188,11 +188,11 @@ namespace FluentAPI.Fluent.ForProfile
     /// Order can be applied multiple columns
     /// </summary>
     /// <param name="column"></param>
-    public IForProfile OrderIncreaseColumn(DocumentColumns column)
+    public IForProfile OrderASCColumn(DocumentColumns column)
     {
       if (Order.ContainsKey(column)) Order.Remove(column);
       Order.Add(column, true);
-      return this as IForProfile;
+      return this as ForProfile;
     }
 
 
@@ -202,11 +202,11 @@ namespace FluentAPI.Fluent.ForProfile
     /// </summary>
     /// <param name="column"></param>
     /// <returns></returns>
-    public IForProfile OrderDecreaseColumn(DocumentColumns column)
+    public IForProfile OrderDESCColumn(DocumentColumns column)
     {
       if (Order.ContainsKey(column)) Order.Remove(column);
       Order.Add(column, false);
-      return this as IForProfile;
+      return this as ForProfile;
     }
 
   }

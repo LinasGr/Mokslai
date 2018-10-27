@@ -5,7 +5,7 @@
     void List();
     IForProfile Is(DocumentStatus status);
     IForProfile Not(DocumentStatus status);
-    IForProfile OrderDecreaseColumn(DocumentColumns columns);
-    IForProfile OrderIncreaseColumn(DocumentColumns columns);
+    IForProfile OrderDESCColumn(DocumentColumns columns);
+    IForProfile OrderASCColumn(DocumentColumns columns);
   }
 }
