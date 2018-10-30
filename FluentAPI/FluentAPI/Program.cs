@@ -1,4 +1,4 @@
-using FluentAPI.Fluent;
+using FluentAPI.API;
 using FluentAPI.Models;
 
 
@@ -13,7 +13,7 @@ namespace FluentAPI
         .ForProfile(1)
           .Is( DocumentStatus.Visible)
           .Not(DocumentStatus.Valid)
-          .OrderDESCColumn(DocumentColumns.AssociationId)
+          .OrderDESC(DocumentColumns.AssociationId)
         .List();
       //new Documents()
       //  .ForAssociation(1)

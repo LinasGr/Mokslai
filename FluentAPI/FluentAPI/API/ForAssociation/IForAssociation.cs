@@ -1,4 +1,6 @@
-﻿namespace FluentAPI.Fluent.ForAssociation
+﻿using FluentAPI.Models;
+
+namespace FluentAPI.API.ForAssociation
 {
   interface IForAssociation
   {

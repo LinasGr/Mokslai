@@ -1,6 +1,7 @@
 ﻿using System;
+using FluentAPI.Models;
 
-namespace FluentAPI.Fluent.ForAssociation
+namespace FluentAPI.API.ForAssociation
 {
   class ForAssociation:IForAssociation
   {

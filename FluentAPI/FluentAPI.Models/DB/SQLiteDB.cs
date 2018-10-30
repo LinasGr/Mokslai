@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dapper;
 using FluentAPI.Models.Models;
 
 namespace FluentAPI.Models.DB
 {
-  class SQLite : IDB
+  public class SQLiteDB : IDB
   {
     public void Create(string table, IRecord record)
     {
@@ -29,11 +26,11 @@ namespace FluentAPI.Models.DB
       }
     }
 
-    public void Read(string query,ref List<IRecord> recordList)
+    public List<IRecord> Read<IRecord>(string query)
     {
       using (var cnn = new SQLiteConnection(LoadConnectionString()))
       {
-        recordList  = cnn.Query<IRecord>(query, new DynamicParameters()).ToList();
+        return cnn.Query<IRecord>(query, new DynamicParameters()).ToList();
       }
     }
 
@@ -45,7 +42,7 @@ namespace FluentAPI.Models.DB
       }
     }
 
-    private static string LoadConnectionString(string id = "Default")
+    private static string LoadConnectionString(string id = "SQLite")
     {
       return ConfigurationManager.ConnectionStrings[id].ConnectionString;
     }

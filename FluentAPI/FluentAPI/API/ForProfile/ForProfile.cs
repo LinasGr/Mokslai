@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAPI.Models;
+using FluentAPI.Models.DB;
+using FluentAPI.Models.Models;
 
-namespace FluentAPI.Fluent.ForProfile
+namespace FluentAPI.API.ForProfile
 {
   /// <summary>
   /// ForProfile class to format query, retrieve data and give it in various forms
@@ -11,6 +13,7 @@ namespace FluentAPI.Fluent.ForProfile
   class ForProfile : IForProfile
   {
     private const int ID_FOR_ALL_PROFILES=0;
+    private const string DEFAULT_TABLE_NAME = "Documents";
 
     //Variable for filtering records
     private Dictionary<DocumentStatus, bool> Filter = new Dictionary<DocumentStatus, bool>();
@@ -20,15 +23,18 @@ namespace FluentAPI.Fluent.ForProfile
 
     //Profile id records belong to
     private int ProfileId = ID_FOR_ALL_PROFILES;
+    //Table name
+    private string _table;
 
 
     /// <summary>
     /// Constructor with default value not related to any ProfileID
     /// </summary>
     /// <param name="id"></param>
-    public ForProfile(int id = ID_FOR_ALL_PROFILES)
+    public ForProfile(int id = ID_FOR_ALL_PROFILES,string table=DEFAULT_TABLE_NAME)
     {
       ProfileId = id;
+      _table = table;
     }
 
     /// <summary>
@@ -66,12 +72,16 @@ namespace FluentAPI.Fluent.ForProfile
     {
       //do query with these filters
       Filter.ToList().ForEach(x => Console.WriteLine(x.Key + " - " + x.Value));
-      var sqlString = "SELECT * FROM Documents";
+      var sqlString = "SELECT * FROM "+_table;
       sqlString += GetFilterString() + GetOrderString() + ";";
-      Db.LoadDocuments(sqlString).ForEach(x =>
-      {
-        Console.WriteLine(x.ToJson().ToString());
-      });
+
+      new SQLiteDB().Read<Document>(sqlString)
+        .ForEach(x => Console.WriteLine(x.ToJson()));
+
+      //Db.LoadDocuments(sqlString).ForEach(x =>
+      //{
+      //  Console.WriteLine(x.ToJson().ToString());
+      //});
     }
 
     /// <summary>
@@ -79,7 +89,7 @@ namespace FluentAPI.Fluent.ForProfile
     /// Order can be applied multiple columns
     /// </summary>
     /// <param name="column"></param>
-    public IForProfile OrderASCColumn(DocumentColumns column)
+    public IForProfile OrderASC(DocumentColumns column)
     {
       if (Order.ContainsKey(column)) Order.Remove(column);
       Order.Add(column, true);
@@ -93,7 +103,7 @@ namespace FluentAPI.Fluent.ForProfile
     /// </summary>
     /// <param name="column"></param>
     /// <returns></returns>
-    public IForProfile OrderDESCColumn(DocumentColumns column)
+    public IForProfile OrderDESC(DocumentColumns column)
     {
       if (Order.ContainsKey(column)) Order.Remove(column);
       Order.Add(column, false);

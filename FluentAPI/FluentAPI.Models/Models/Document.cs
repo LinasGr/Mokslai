@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Script.Serialization;
 using FluentAPI.Models.Models;
 
@@ -11,9 +10,6 @@ namespace FluentAPI.Models
   /// </summary>
   public class Document : IRecord
   {
-    //List of properties/columns in object/table
-    public string[] Columns { get; }
-
     public int Id { get; }
     public int AssociationId { get; set; }
     public DateTime ValidationDate { get; set; }
@@ -26,21 +22,6 @@ namespace FluentAPI.Models
     public DateTime SignedDate { get; set; }
     public DateTime PaidDate { get; set; }
 
-    public Document()
-    {
-      Columns=new string[11];
-      Columns[0] = "Id";
-      Columns[1] = "AssociationId";
-      Columns[2] = "ValidationDate";
-      Columns[3] = "ExpirationDate";
-      Columns[4] = "Text";
-      Columns[5] = "Visible";
-      Columns[6] = "ProfileId";
-      Columns[7] = "Signed";
-      Columns[8] = "Paid";
-      Columns[9] = "SignedDate";
-      Columns[10] = "PaidDate";
-    }
 
     /// <summary>
     /// Document values to string
@@ -78,9 +59,9 @@ namespace FluentAPI.Models
     public string AtAllColumns()
     {
       var str = "";
-      foreach (var name in Columns)
+      foreach (var property in this.GetType().GetProperties())
       {
-        str += (name == "Id") ? "" : "@" + name + ",";
+        str += (property.Name == "Id") ? "" : "@" + property.Name + ",";
       }
       return str.TrimEnd(',');
     }
@@ -92,9 +73,9 @@ namespace FluentAPI.Models
     public string AllColumns()
     {
       var str = "";
-      foreach (var name in Columns)
+      foreach (var property in this.GetType().GetProperties())
       {
-        str += (name == "Id") ? "" : name + ",";
+        str += (property.Name == "Id") ? "" : property.Name + ",";
       }
       return str.TrimEnd(',');
     }

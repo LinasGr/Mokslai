@@ -1,9 +1,10 @@
-﻿using FluentAPI.Fluent.ForProfile;
-using FluentAPI.Fluent.ForAssociation;
+﻿using FluentAPI.API.ForProfile;
+using FluentAPI.API.ForAssociation;
 using FluentAPI.Models;
 
 
-namespace FluentAPI.Fluent
+
+namespace FluentAPI.API
 {
   /// <summary>
   /// Class to play with intuitive/fluent API
@@ -13,12 +14,16 @@ namespace FluentAPI.Fluent
   /// </summary>
   class Documents:Document
   {
-    public IForProfile ForProfile(int id=0)
+    private const string TABLE_NAME = "Documents";
+    private const int ID_FOR_ALL_RECORDS = 0;
+   
+
+    public IForProfile ForProfile(int id=ID_FOR_ALL_RECORDS, string table=TABLE_NAME)
     {
-      return new ForProfile.ForProfile(id);
+      return new ForProfile.ForProfile(id,table);
     }
 
-    public IForAssociation ForAssociation(int id=0)
+    public IForAssociation ForAssociation(int id=ID_FOR_ALL_RECORDS)
     {
       return new ForAssociation.ForAssociation(id);
     }

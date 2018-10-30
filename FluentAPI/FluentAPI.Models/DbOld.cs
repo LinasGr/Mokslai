@@ -10,7 +10,7 @@ namespace FluentAPI.Models
   /// <summary>
   /// SQLite db query class
   /// </summary>
-  public class Db
+  public class DbOld
   {
     /// <summary>
     /// Get list of Documents from db by query
