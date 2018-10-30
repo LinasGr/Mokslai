@@ -10,6 +10,8 @@ namespace FluentAPI.Fluent.ForProfile
   /// </summary>
   class ForProfile : IForProfile
   {
+    private const int ID_FOR_ALL_PROFILES=0;
+
     //Variable for filtering records
     private Dictionary<DocumentStatus, bool> Filter = new Dictionary<DocumentStatus, bool>();
 
@@ -17,15 +19,14 @@ namespace FluentAPI.Fluent.ForProfile
     private Dictionary<DocumentColumns, bool> Order = new Dictionary<DocumentColumns, bool>();
 
     //Profile id records belong to
-    //If ProfileId=0 no filtering acoirding ProfileId done
-    private int ProfileId = 0;
+    private int ProfileId = ID_FOR_ALL_PROFILES;
 
 
     /// <summary>
     /// Constructor with default value not related to any ProfileID
     /// </summary>
     /// <param name="id"></param>
-    public ForProfile(int id = 0)
+    public ForProfile(int id = ID_FOR_ALL_PROFILES)
     {
       ProfileId = id;
     }
@@ -74,116 +75,6 @@ namespace FluentAPI.Fluent.ForProfile
     }
 
     /// <summary>
-    /// Return string with documents query filters
-    /// </summary>
-    /// <returns></returns>
-    private string GetFilterString()
-    {
-      string sqlString = " WHERE ";
-      if (Filter != null)
-      {
-        foreach (var arr in Filter)
-        {
-          switch (arr.Key)
-          {
-            case DocumentStatus.Visible:
-              if (sqlString.Length > 7) sqlString += "AND ";
-              if (arr.Value) sqlString += "Visible=1 ";
-              else sqlString += "Visible=0 ";
-              break;
-            case DocumentStatus.Paid:
-              if (sqlString.Length > 7) sqlString += "AND ";
-              if (arr.Value) sqlString += "Paid=1 ";
-              else sqlString += "Paid=0 ";
-              break;
-            case DocumentStatus.Signed:
-              if (sqlString.Length > 7) sqlString += "AND ";
-              if (arr.Value) sqlString += "Signed=1 ";
-              else sqlString += "Signed=0 ";
-              break;
-            case DocumentStatus.Valid:
-              if (sqlString.Length > 7) sqlString += "AND ";
-              if (arr.Value)
-                sqlString += "date('now') BETWEEN ValidationDate AND ExpirationDate ";
-              else
-                sqlString += "date('now') NOT BETWEEN ValidationDate AND ExpirationDate ";
-              break;
-          }
-        }
-      }
-      if (ProfileId > 0)
-      {
-        if (sqlString.Length > 7) sqlString += "AND ";
-        sqlString += "ProfileId=" + ProfileId;
-      }
-      return sqlString.Length > 7 ? sqlString : "";
-    }
-
-    /// <summary>
-    /// Return string with documents query order
-    /// </summary>
-    /// <returns></returns>
-    private string GetOrderString()
-    {
-      var order = " ORDER BY ";
-      if (Order != null)
-      {
-        foreach (var arr in Order)
-        {
-          switch (arr.Key)
-          {
-            case DocumentColumns.Id:
-              if (order.Length > 10) order += ", ";
-              if (arr.Value) order += "Id ASC";
-              else order += "Id DESC";
-              break;
-            case DocumentColumns.AssociationId:
-              if (order.Length > 10) order += ", ";
-              if (arr.Value) order += "AssociationId ASC";
-              else order += "AssociationId DESC";
-              break;
-            case DocumentColumns.ExpirationDate:
-              if (order.Length > 10) order += ", ";
-              if (arr.Value) order += "ExpirationDate ASC";
-              else order += "ExpirationDate DESC";
-              break;
-            case DocumentColumns.Text:
-              if (order.Length > 10) order += ", ";
-              if (arr.Value) order += "Text ASC";
-              else order += "Text DESC";
-              break;
-            case DocumentColumns.Visible:
-              if (order.Length > 10) order += ", ";
-              if (arr.Value) order += "Visible ASC";
-              else order += "Visible DESC";
-              break;
-            case DocumentColumns.ProfileId:
-              if (order.Length > 10) order += ", ";
-              if (arr.Value) order += "ProfileId ASC";
-              else order += "ProfileId DESC";
-              break;
-            case DocumentColumns.Paid:
-              if (order.Length > 10) order += ", ";
-              if (arr.Value) order += "Paid ASC";
-              else order += "Paid DESC";
-              break;
-            case DocumentColumns.SignedDate:
-              if (order.Length > 10) order += ", ";
-              if (arr.Value) order += "SignedDate ASC";
-              else order += "SignedDate DESC";
-              break;
-            case DocumentColumns.PaidDate:
-              if (order.Length > 10) order += ", ";
-              if (arr.Value) order += "PaidDate ASC";
-              else order += "PaidDate DESC";
-              break;
-          }
-        }
-      }
-      return order.Length > 10 ? order : "";
-    }
-
-    /// <summary>
     /// Order documents by increasing values in selected column
     /// Order can be applied multiple columns
     /// </summary>
@@ -209,5 +100,116 @@ namespace FluentAPI.Fluent.ForProfile
       return this as ForProfile;
     }
 
+    /// <summary>
+    /// Return string with documents query filters
+    /// </summary>
+    /// <returns></returns>
+    private string GetFilterString()
+    {
+      string sqlString = " WHERE ";
+      var noFilter = sqlString.Length;
+      if (Filter != null)
+      {
+        foreach (var arr in Filter)
+        {
+          switch (arr.Key)
+          {
+            case DocumentStatus.Visible:
+              if (sqlString.Length > noFilter) sqlString += "AND ";
+              if (arr.Value) sqlString += "Visible=1 ";
+              else sqlString += "Visible=0 ";
+              break;
+            case DocumentStatus.Paid:
+              if (sqlString.Length > noFilter) sqlString += "AND ";
+              if (arr.Value) sqlString += "Paid=1 ";
+              else sqlString += "Paid=0 ";
+              break;
+            case DocumentStatus.Signed:
+              if (sqlString.Length > noFilter) sqlString += "AND ";
+              if (arr.Value) sqlString += "Signed=1 ";
+              else sqlString += "Signed=0 ";
+              break;
+            case DocumentStatus.Valid:
+              if (sqlString.Length > noFilter) sqlString += "AND ";
+              if (arr.Value)
+                sqlString += "date('now') BETWEEN ValidationDate AND ExpirationDate ";
+              else
+                sqlString += "date('now') NOT BETWEEN ValidationDate AND ExpirationDate ";
+              break;
+          }
+        }
+      }
+      if (ProfileId > ID_FOR_ALL_PROFILES)
+      {
+        if (sqlString.Length > noFilter) sqlString += "AND ";
+        sqlString += "ProfileId=" + ProfileId;
+      }
+      return sqlString.Length > noFilter ? sqlString : "";
+    }
+
+    /// <summary>
+    /// Return string with documents query order
+    /// </summary>
+    /// <returns></returns>
+    private string GetOrderString()
+    {
+      var order = " ORDER BY ";
+      var noOrder = order.Length;
+      if (Order != null)
+      {
+        foreach (var arr in Order)
+        {
+          switch (arr.Key)
+          {
+            case DocumentColumns.Id:
+              if (order.Length > noOrder) order += ", ";
+              if (arr.Value) order += "Id ASC";
+              else order += "Id DESC";
+              break;
+            case DocumentColumns.AssociationId:
+              if (order.Length > noOrder) order += ", ";
+              if (arr.Value) order += "AssociationId ASC";
+              else order += "AssociationId DESC";
+              break;
+            case DocumentColumns.ExpirationDate:
+              if (order.Length > noOrder) order += ", ";
+              if (arr.Value) order += "ExpirationDate ASC";
+              else order += "ExpirationDate DESC";
+              break;
+            case DocumentColumns.Text:
+              if (order.Length > noOrder) order += ", ";
+              if (arr.Value) order += "Text ASC";
+              else order += "Text DESC";
+              break;
+            case DocumentColumns.Visible:
+              if (order.Length > noOrder) order += ", ";
+              if (arr.Value) order += "Visible ASC";
+              else order += "Visible DESC";
+              break;
+            case DocumentColumns.ProfileId:
+              if (order.Length > noOrder) order += ", ";
+              if (arr.Value) order += "ProfileId ASC";
+              else order += "ProfileId DESC";
+              break;
+            case DocumentColumns.Paid:
+              if (order.Length > noOrder) order += ", ";
+              if (arr.Value) order += "Paid ASC";
+              else order += "Paid DESC";
+              break;
+            case DocumentColumns.SignedDate:
+              if (order.Length > noOrder) order += ", ";
+              if (arr.Value) order += "SignedDate ASC";
+              else order += "SignedDate DESC";
+              break;
+            case DocumentColumns.PaidDate:
+              if (order.Length > noOrder) order += ", ";
+              if (arr.Value) order += "PaidDate ASC";
+              else order += "PaidDate DESC";
+              break;
+          }
+        }
+      }
+      return order.Length > noOrder ? order : "";
+    }
   }
 }

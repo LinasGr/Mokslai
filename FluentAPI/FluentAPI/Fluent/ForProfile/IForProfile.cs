@@ -1,4 +1,6 @@
-﻿namespace FluentAPI.Fluent.ForProfile
+﻿using FluentAPI.Models;
+
+namespace FluentAPI.Fluent.ForProfile
 {
   interface IForProfile
   {

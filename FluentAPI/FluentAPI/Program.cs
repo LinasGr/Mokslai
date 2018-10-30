@@ -1,4 +1,6 @@
 using FluentAPI.Fluent;
+using FluentAPI.Models;
+
 
 namespace FluentAPI
 {
@@ -9,7 +11,7 @@ namespace FluentAPI
       //Testing Fluent Api SQLite querry to JSON
       new Documents()
         .ForProfile(1)
-          .Is(DocumentStatus.Visible)
+          .Is( DocumentStatus.Visible)
           .Not(DocumentStatus.Valid)
           .OrderDESCColumn(DocumentColumns.AssociationId)
         .List();
