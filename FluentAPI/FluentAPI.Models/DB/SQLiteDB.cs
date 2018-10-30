@@ -14,7 +14,8 @@ namespace FluentAPI.Models.DB
     {
       using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
       {
-        cnn.Execute($"INSERT INTO {table} ({record.AllColumns()}) Values ({record.AtAllColumns()});", record);
+        var str = $"INSERT INTO {table} ({record.AllColumns()}) Values ({record.AtAllColumns()});";
+        cnn.Execute(str, record);
       }
     }
 

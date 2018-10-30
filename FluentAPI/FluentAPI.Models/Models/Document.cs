@@ -22,6 +22,21 @@ namespace FluentAPI.Models
     public DateTime SignedDate { get; set; }
     public DateTime PaidDate { get; set; }
 
+    /// <summary>
+    /// Creates document for Association
+    /// </summary>
+    /// <param name="AssociationId"></param>
+    /// <param name="ValidationDate"></param>
+    /// <param name="ExpirationDate"></param>
+    /// <param name="Text"></param>
+    public Document(int AssociationId, DateTime ValidationDate, DateTime ExpirationDate, string Text,bool Visible)
+    {
+      this.AssociationId = AssociationId;
+      this.ValidationDate = ValidationDate;
+      this.ExpirationDate = ExpirationDate;
+      this.Text = Text;
+      this.Visible = true;
+    }
 
     /// <summary>
     /// Document values to string

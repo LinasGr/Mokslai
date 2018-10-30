@@ -66,9 +66,29 @@ namespace FluentAPI.API.ForProfile
     }
 
     /// <summary>
+    /// Creates new Document for Profile
+    /// </summary>
+    public void Create(int TemplateId)
+    {
+      if (ProfileId != ID_FOR_ALL_PROFILES)
+      {
+        //Reads template of document
+        var sqlString = $"SELECT * FROM {_table} WHERE id={TemplateId};";
+        var db = new SQLiteDB();
+        var docs = db.Read<Document>(sqlString);
+        //If template found
+        if (docs.Count == 1)
+        {
+          docs[0].ProfileId = ProfileId;
+          db.Create(_table,docs[0]);
+        }
+      }
+    }
+
+    /// <summary>
     /// Get documents by formatted query
     /// </summary>
-    public void List()
+    public void Read()
     {
       //do query with these filters
       Filter.ToList().ForEach(x => Console.WriteLine(x.Key + " - " + x.Value));
