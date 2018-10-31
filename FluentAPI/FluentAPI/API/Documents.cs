@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAPI.API.DB;
 using FluentAPI.API.ForProfile;
 using FluentAPI.API.ForAssociation;
 using FluentAPI.Models;
@@ -17,6 +18,7 @@ namespace FluentAPI.API
   {
     private const string TABLE_NAME = "Documents";
     private const int ID_FOR_ALL_RECORDS = 0;
+    private FilterRecords _filter=new FilterRecords();
    
 
     public IForProfile ForProfile(int id=ID_FOR_ALL_RECORDS, string table=TABLE_NAME)

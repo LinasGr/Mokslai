@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbOld.cs" />
+    <Compile Include="DB\FilterRecords.cs" />
     <Compile Include="DB\IDB.cs" />
     <Compile Include="DB\SQLiteDB.cs" />
     <Compile Include="Models\Document.cs" />
