@@ -68,12 +68,12 @@ namespace FluentAPI.API.ForProfile
     /// <summary>
     /// Creates new Document for Profile
     /// </summary>
-    public void Create(int TemplateId)
+    public void Create(int DocumentTemplateId)
     {
       if (ProfileId != ID_FOR_ALL_PROFILES)
       {
         //Reads template of document
-        var sqlString = $"SELECT * FROM {_table} WHERE id={TemplateId};";
+        var sqlString = $"SELECT * FROM {_table} WHERE id={DocumentTemplateId};";
         var db = new SQLiteDB();
         var docs = db.Read<Document>(sqlString);
         //If template found
@@ -86,7 +86,7 @@ namespace FluentAPI.API.ForProfile
     }
 
     /// <summary>
-    /// Get documents by formatted query
+    /// Get documents with constructed query
     /// </summary>
     public void Read()
     {
@@ -102,6 +102,22 @@ namespace FluentAPI.API.ForProfile
       //{
       //  Console.WriteLine(x.ToJson().ToString());
       //});
+    }
+
+    /// <summary>
+    /// Update particular document which belongs to profile
+    /// </summary>
+    public void Update()
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Delete particular document which belongs to profile
+    /// </summary>
+    public void Delete()
+    {
+      throw new NotImplementedException();
     }
 
     /// <summary>

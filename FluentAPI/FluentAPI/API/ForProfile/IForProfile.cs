@@ -5,8 +5,10 @@ namespace FluentAPI.API.ForProfile
 {
   interface IForProfile
   {
-    void Create(int TemplateId);
+    void Create(int DocumentTemplateId);
     void Read();
+    void Update();
+    void Delete();
     IForProfile Is(DocumentStatus status);
     IForProfile Not(DocumentStatus status);
     IForProfile OrderDESC(DocumentColumns columns);

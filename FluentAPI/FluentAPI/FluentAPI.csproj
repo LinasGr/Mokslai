@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Documents.cs" />
+    <Compile Include="API\Filter\Filter.cs" />
     <Compile Include="API\ForAssociation\ForAssocciation.cs" />
     <Compile Include="API\ForAssociation\IForAssociation.cs" />
     <Compile Include="API\ForProfile\ForProfile.cs" />

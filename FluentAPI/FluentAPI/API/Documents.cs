@@ -1,4 +1,5 @@
-﻿using FluentAPI.API.ForProfile;
+﻿using System;
+using FluentAPI.API.ForProfile;
 using FluentAPI.API.ForAssociation;
 using FluentAPI.Models;
 using FluentAPI.Models.DB;
@@ -32,6 +33,21 @@ namespace FluentAPI.API
     {
       //Creates SQLite record
       new SQLiteDB().Create(TABLE_NAME,doc);
+    }
+
+    public void Read()
+    {
+      throw new NotImplementedException();
+    }
+
+    public void Update()
+    {
+      throw new NotImplementedException();
+    }
+
+    public void Delete()
+    {
+      throw new NotImplementedException();
     }
   }
 
