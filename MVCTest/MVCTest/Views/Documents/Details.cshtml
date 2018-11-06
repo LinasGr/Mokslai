@@ -1,0 +1,60 @@
+﻿@model MVCTest.Models.Document
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Document</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ValidFromDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ValidFromDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ValidTillDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ValidTillDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Visible)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Visible)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BelongsToAssocID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BelongsToAssocID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
