@@ -19,6 +19,27 @@ namespace MVCTest.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("MVCTest.Models.Association", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("ShortName")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Association");
+                });
+
             modelBuilder.Entity("MVCTest.Models.Document", b =>
                 {
                     b.Property<int>("ID")
@@ -45,6 +66,34 @@ namespace MVCTest.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Document");
+                });
+
+            modelBuilder.Entity("MVCTest.Models.Profile", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<string>("E_Mail")
+                        .IsRequired();
+
+                    b.Property<string>("FamilyName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("UserID");
+
+                    b.Property<bool>("Visible");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Profile");
                 });
 #pragma warning restore 612, 618
         }

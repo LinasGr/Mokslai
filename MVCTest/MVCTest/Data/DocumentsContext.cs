@@ -7,15 +7,17 @@ using MVCTest.Models;
 
 namespace MVCTest.Models
 {
-    public class DocumentsContext : DbContext
+  public class DocumentsContext : DbContext
+  {
+    public DocumentsContext(DbContextOptions<DocumentsContext> options)
+        : base(options)
     {
-        public DocumentsContext (DbContextOptions<DocumentsContext> options)
-            : base(options)
-        {
-        }
-
-        public DbSet<MVCTest.Models.Document> Document { get; set; }
-
-        public DbSet<MVCTest.Models.Association> Association { get; set; }
     }
+
+    public DbSet<MVCTest.Models.Document> Document { get; set; }
+
+    public DbSet<MVCTest.Models.Association> Association { get; set; }
+
+    public DbSet<MVCTest.Models.Profile> Profile { get; set; }
+  }
 }
