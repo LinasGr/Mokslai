@@ -2,16 +2,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Acme.SimpleTaskApp.Web.Controllers
 {
-    public class HomeController : SimpleTaskAppControllerBase
+  public class HomeController : SimpleTaskAppControllerBase
+  {
+    public ActionResult Index()
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            return View();
-        }
+      return RedirectToAction("Index", "Tasks");
     }
+
+    public ActionResult About()
+    {
+      return View();
+    }
+  }
 }
